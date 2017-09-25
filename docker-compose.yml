@@ -1,0 +1,16 @@
+version: '2.2'
+services:
+  app-a:
+    extends:
+      file: './app-a/docker-compose.yml'
+      service: app
+    environment:
+      - INTERNAL_SERVICE_HOST=app-b
+      - EXTERNAL_SERVICE_HOST=http://www.google.com
+
+  app-b:
+    extends:
+      file: './app-b/docker-compose.yml'
+      service: app
+    env_file:
+      - ./app-b/database.env
